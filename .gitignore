@@ -1,0 +1,8 @@
+
+.idea/
+# Log file
+*.log
+### Maven template
+**/target/
+.idea
+*.iml
