@@ -22,10 +22,10 @@ import java.util.List;
 public class TelemetryManagerDemo {
 
     private static SenseCAPClient senseCAPClient;
-
+    private static String deviceEui="";
     static {
-        String accessId = "593D8C03822F9F55";
-        String accessKey = "E602E108EE6CA76AFBCBC235CF8A2C2AC8AEE774BB7399F9CD1F3C534EA44978";
+        String accessId = "";
+        String accessKey = "";
         int region = RegionType.SENSECAP_CC.getRegion();
         OpenApiConfig openApiConfig = new OpenApiConfig(accessId, accessKey, region);
         senseCAPClient = new SenseCAPClientBuilder().buildConfig(openApiConfig);
@@ -43,7 +43,7 @@ public class TelemetryManagerDemo {
 
     public static void getLatestTelemetryData() throws BaseException {
         DataResult dataResult = senseCAPClient.getDataManager().createDataQuery()
-                .deviceEui("2CF7F12110700077")
+                .deviceEui(deviceEui)
                 .channelIndex(1)
                 .measurementId(4099)
                 .build()
@@ -60,7 +60,7 @@ public class TelemetryManagerDemo {
          */
         DataResult dataResult = senseCAPClient.getDataManager().createDataQuery()
                 .startTime(1605600000000L)
-                .deviceEui("2CF7F12110700077")
+                .deviceEui(deviceEui)
                 .build()
                 .execute();
         List<ChartPointDataInfo> chartPointDataInfos = dataResult.chartPointData();
@@ -84,7 +84,7 @@ public class TelemetryManagerDemo {
 
     public static void getTelemetryDataList() throws BaseException {
         DataResult dataResult = senseCAPClient.getDataManager().createDataQuery()
-                .deviceEui("2CF7F12110700077")
+                .deviceEui(deviceEui)
                 .channelIndex(1)
                 .measurementId(4099)
                 .startTime(1602385871000L)
@@ -100,7 +100,7 @@ public class TelemetryManagerDemo {
 
     public static void getTelemetryDataListCallBack() throws BaseException {
         DataResult dataResult = senseCAPClient.getDataManager().createDataQuery()
-                .deviceEui("2CF7F12110700077")
+                .deviceEui(deviceEui)
                 .channelIndex(1)
                 //.measurementId(4100)
                 .startTime(1605385871000L)
@@ -119,47 +119,4 @@ public class TelemetryManagerDemo {
 
 
     }
-/*
-    public static void getTelemetryDataListCallBackV1() throws BaseException {
-        String accessId = "KL7YGS1TQP5DZYTO";
-        String accessKey = "195957AE1F95469EB822E2944CBC95BEC0C7422F2028476F948B8436F4578D8F";
-        int region = RegionType.SENSECAP_CC.getRegion();
-
-        OpenApiConfig openApiConfig = new OpenApiConfig(accessId, accessKey, region);
-        SenseCAP client = new SenseCAPClientBuilder().build(accessId, accessKey, region);
-        List<TelemetryDataInfo> telemetryDataList = client.getTelemetryDataList("2CF7F1201470028B", 1, 4097, 30, 0, 0);
-        System.out.println(JSON.toJSONString(telemetryDataList));
-        SenseCAPClientBuilder.build(openApiConfig).getTelemetryManager()
-                .deviceEui("2CF7F1201470028B")
-                .channelIndex(1)
-                .limit(300)
-                .measurementId(4097)
-                .startTime(1599206725516L)
-                //.endTime(1599448448000L)
-                .getTelemetryDataList(telemetryDataResult -> {
-                    System.out.println("***** 4097----->>>> " + telemetryDataResult.toString());
-                });
-
-        System.out.println("connection.....");
-    }
-
-
-    public static void getChartPointDataBatch() throws BaseException {
-        String accessId = "593D8C03822F9F55";
-        String accessKey = "E602E108EE6CA76AFBCBC235CF8A2C2AC8AEE774BB7399F9CD1F3C534EA44978";
-        int region = RegionType.SENSECAP_CC.getRegion();
-        OpenApiConfig openApiConfig = new OpenApiConfig(accessId, accessKey, region);
-
-        List<DeviceChartPointParam >list=Lists.newArrayList();
-        DeviceChartPointParam deviceChartPointParam=new DeviceChartPointParam();
-        deviceChartPointParam.setDeviceEui("2CF7F12010700061");
-        deviceChartPointParam.setStartTime(1597051308000L);
-        list.add(deviceChartPointParam);
-        List<ChartPointDataBatch> chartPointDataBatch = SenseCAPClientBuilder.build(openApiConfig)
-                .getTelemetryManager()
-                .deviceChartPointParams(list)
-                .getChartPointDataBatch();
-        System.out.println(JSON.toJSONString(chartPointDataBatch));
-    }
-*/
 }

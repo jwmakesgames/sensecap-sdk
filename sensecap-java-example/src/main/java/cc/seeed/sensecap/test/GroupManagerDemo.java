@@ -21,10 +21,10 @@ public class GroupManagerDemo {
 
 
     private static SenseCAPClient senseCAPClient;
-
+    private static String deviceEui="";
     static {
-        String accessId = "KUFE0W52P8QJX8DB";
-        String accessKey = "28E07CA0D52B48C69886D7ACF1AD683F3690EE0E1E0C4201B88A26A61344625C";
+        String accessId = "";
+        String accessKey = "";
         int region = RegionType.SENSECAP_CC.getRegion();
         OpenApiConfig openApiConfig = new OpenApiConfig(accessId, accessKey, region);
         senseCAPClient = new SenseCAPClientBuilder().buildConfig(openApiConfig);
@@ -39,16 +39,16 @@ public class GroupManagerDemo {
     }
 
     public static void createGroup() throws BaseException {
-        GroupInfo result = senseCAPClient.getGroupManager().createGroupQuery().groupName("SDK-5").build().create();
+        GroupInfo result = senseCAPClient.getGroupManager().createGroupQuery().groupName("SDK-test").build().create();
         System.out.println(result);
     }
 
     public static void renameGroup() throws BaseException {
-        senseCAPClient.getGroupManager().renameGroup("C1B08E961947A308", "SDk-4-G");
+        senseCAPClient.getGroupManager().renameGroup("", "SDk-test");
     }
 
     public static void removeGroup() throws BaseException {
-        senseCAPClient.getGroupManager().removeGroup("5730E74FD3A817C0");
+        senseCAPClient.getGroupManager().removeGroup(" ");
     }
 
     public static void getGroupList() throws BaseException {

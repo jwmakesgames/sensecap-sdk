@@ -20,9 +20,11 @@ public class DeviceManagerDemo {
 
     private static SenseCAPClient senseCAPClient;
 
+    private static String deviceEui="";
+
     static {
-        String accessId = "KUFE0W52P8QJX8DB";
-        String accessKey = "28E07CA0D52B48C69886D7ACF1AD683F3690EE0E1E0C4201B88A26A61344625C";
+        String accessId = "";
+        String accessKey = "";
         int region = RegionType.SENSECAP_CC.getRegion();
         OpenApiConfig openApiConfig = new OpenApiConfig(accessId, accessKey, region);
         senseCAPClient = new SenseCAPClientBuilder().buildConfig(openApiConfig);
@@ -39,8 +41,8 @@ public class DeviceManagerDemo {
 
     public static void moveDeivces() throws BaseException {
         List<String> deviceEuis = Lists.newArrayList();
-        deviceEuis.add("2CF7F12122500055");
-        senseCAPClient.getDeviceManager().moveDevices("C1B08E961947A308", deviceEuis);
+        deviceEuis.add(deviceEui);
+        senseCAPClient.getDeviceManager().moveDevices("", deviceEuis);
     }
 
 
@@ -57,7 +59,7 @@ public class DeviceManagerDemo {
 
     public static void getDeviceInfoList() throws BaseException {
         List<String> deviceEuis = Lists.newArrayList();
-        deviceEuis.add("2CF7F12122500055");
+        deviceEuis.add(deviceEui);
         DeviceResult deviceResult = senseCAPClient.getDeviceManager().createDeviceQuery()
                 .deviceEuis(deviceEuis)
                 .deviceType(2)
@@ -71,7 +73,7 @@ public class DeviceManagerDemo {
 
     static void getDeviceChannelList() throws BaseException {
         List<String> deviceEuis = Lists.newArrayList();
-        deviceEuis.add("2CF7F12122500055");
+        deviceEuis.add(deviceEui);
         DeviceResult deviceResult = senseCAPClient.getDeviceManager().createDeviceQuery()
                 .deviceEuis(deviceEuis)
                 .build()
@@ -82,7 +84,7 @@ public class DeviceManagerDemo {
 
     static void getDeviceRunningStatusList() throws BaseException {
         List<String> deviceEuis = Lists.newArrayList();
-        deviceEuis.add("2CF7F12122500055");
+        deviceEuis.add(deviceEui);
         DeviceResult deviceResult = senseCAPClient.getDeviceManager().createDeviceQuery()
                 .deviceEuis(deviceEuis)
                 .build()
@@ -105,7 +107,7 @@ public class DeviceManagerDemo {
 
     static void deleteDevices() throws BaseException {
         List<String> deviceEuis = Lists.newArrayList();
-        deviceEuis.add("2CF7F12122500055");
+        deviceEuis.add(deviceEui);
         boolean b = senseCAPClient.getDeviceManager().deleteDevices(deviceEuis);
     }
 
