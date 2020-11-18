@@ -1,6 +1,5 @@
 package cc.seeed.sensecap.test;
 
-import callback.DataCallBack;
 import cc.seeed.sensecap.SenseCAPClient;
 import cc.seeed.sensecap.SenseCAPClientBuilder;
 import cc.seeed.sensecap.common.enums.RegionType;
