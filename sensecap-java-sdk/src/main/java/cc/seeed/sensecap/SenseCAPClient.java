@@ -1,7 +1,10 @@
 package cc.seeed.sensecap;
 
 import cc.seeed.sensecap.config.OpenApiConfig;
-import cc.seeed.sensecap.manager.*;
+import cc.seeed.sensecap.manager.DataManager;
+import cc.seeed.sensecap.manager.DeviceManager;
+import cc.seeed.sensecap.manager.GroupManager;
+import cc.seeed.sensecap.manager.OrganizationManager;
 
 /**
  * @Author AG

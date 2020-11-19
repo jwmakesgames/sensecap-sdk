@@ -2,7 +2,6 @@ package cc.seeed.sensecap.model.result;
 
 import cc.seeed.sensecap.actions.TelemetryData;
 import cc.seeed.sensecap.exception.BaseException;
-import cc.seeed.sensecap.model.callback.TelemetryDataCallback;
 import cc.seeed.sensecap.model.data.ChartDataListInfo;
 import cc.seeed.sensecap.model.data.ChartPointDataInfo;
 import cc.seeed.sensecap.model.data.LatestTelemetryDataInfo;

@@ -33,13 +33,13 @@ public final class GroupManager implements SenseCAPGroup {
     }
 
     @Override
-    public GroupInfo createGroup(String groupName) throws BaseException {
-        return group.createGroup(groupName);
+    public GroupInfo create(String groupName) throws BaseException {
+        return group.create(groupName);
     }
 
     @Override
-    public void renameGroup(String groupUUID, String groupName) throws BaseException {
-        group.renameGroup(groupUUID, groupName);
+    public void rename(String groupUUID, String groupName) throws BaseException {
+        group.rename(groupUUID, groupName);
     }
 
     @Override
@@ -48,7 +48,7 @@ public final class GroupManager implements SenseCAPGroup {
     }
 
     @Override
-    public void removeGroup(String groupUUID) throws BaseException {
-        group.removeGroup(groupUUID);
+    public void remove(String groupUUID) throws BaseException {
+        group.remove(groupUUID);
     }
 }

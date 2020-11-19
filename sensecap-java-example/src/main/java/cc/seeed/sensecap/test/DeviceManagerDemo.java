@@ -1,11 +1,12 @@
 package cc.seeed.sensecap.test;
-
 import cc.seeed.sensecap.SenseCAPClient;
 import cc.seeed.sensecap.SenseCAPClientBuilder;
 import cc.seeed.sensecap.common.enums.RegionType;
 import cc.seeed.sensecap.config.OpenApiConfig;
 import cc.seeed.sensecap.exception.BaseException;
-import cc.seeed.sensecap.model.device.*;
+import cc.seeed.sensecap.model.device.DeviceChannelInfo;
+import cc.seeed.sensecap.model.device.DeviceInfo;
+import cc.seeed.sensecap.model.device.DeviceStatusInfo;
 import cc.seeed.sensecap.model.result.DeviceResult;
 import com.google.common.collect.Lists;
 import java.util.List;
@@ -19,12 +20,11 @@ import java.util.List;
 public class DeviceManagerDemo {
 
     private static SenseCAPClient senseCAPClient;
-
-    private static String deviceEui="";
+    private static String deviceEui=" ";
 
     static {
-        String accessId = "";
-        String accessKey = "";
+        String accessId = " ";
+        String accessKey = " ";
         int region = RegionType.SENSECAP_CC.getRegion();
         OpenApiConfig openApiConfig = new OpenApiConfig(accessId, accessKey, region);
         senseCAPClient = new SenseCAPClientBuilder().buildConfig(openApiConfig);
@@ -42,7 +42,7 @@ public class DeviceManagerDemo {
     public static void moveDeivces() throws BaseException {
         List<String> deviceEuis = Lists.newArrayList();
         deviceEuis.add(deviceEui);
-        senseCAPClient.getDeviceManager().moveDevices("", deviceEuis);
+        senseCAPClient.getDeviceManager().moveDevices("C1B08E961947A308", deviceEuis);
     }
 
 

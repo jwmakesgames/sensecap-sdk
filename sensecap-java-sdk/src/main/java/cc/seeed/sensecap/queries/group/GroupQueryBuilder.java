@@ -1,8 +1,6 @@
 package cc.seeed.sensecap.queries.group;
 
-import cc.seeed.sensecap.actions.Group;
 import cc.seeed.sensecap.config.OpenApiConfig;
-import cc.seeed.sensecap.model.result.GroupResult;
 
 /**
  * @Author AG

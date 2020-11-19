@@ -2,7 +2,6 @@ package cc.seeed.sensecap.actions;
 
 import cc.seeed.sensecap.api.url.PathConst;
 import cc.seeed.sensecap.common.utils.JsonUtils;
-import cc.seeed.sensecap.common.utils.StringUtil;
 import cc.seeed.sensecap.config.OpenApiConfig;
 import cc.seeed.sensecap.exception.BaseException;
 import cc.seeed.sensecap.exception.HttpResponseMessageCode;

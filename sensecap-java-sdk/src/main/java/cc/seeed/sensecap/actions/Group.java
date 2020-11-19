@@ -31,7 +31,7 @@ public class Group implements SenseCAPGroup {
         this.openApiConfig = openApiConfig;
     }
 
-    public GroupInfo createGroup(String groupName) throws BaseException {
+    public GroupInfo create(String groupName) throws BaseException {
 
         Map<String, String> bodys = Maps.newHashMapWithExpectedSize(1);
         if (StringUtils.isBlank(groupName)) {
@@ -72,7 +72,7 @@ public class Group implements SenseCAPGroup {
     }
 
 
-    public void renameGroup(String groupUUID, String groupName) throws BaseException {
+    public void rename(String groupUUID, String groupName) throws BaseException {
 
         if (StringUtils.isBlank(groupName)) {
             throw new BaseException(HttpResponseMessageCode.NOT_PARAM);
@@ -95,7 +95,7 @@ public class Group implements SenseCAPGroup {
         }
     }
 
-    public void removeGroup(String groupUUID) throws BaseException {
+    public void remove(String groupUUID) throws BaseException {
         if (StringUtils.isBlank(groupUUID)) {
             throw new BaseException(HttpResponseMessageCode.NOT_PARAM);
         }

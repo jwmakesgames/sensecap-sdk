@@ -1,12 +1,12 @@
 package cc.seeed.sensecap.manager;
-
-import cc.seeed.sensecap.actions.TelemetryData;
-import cc.seeed.sensecap.config.OpenApiConfig;
-import cc.seeed.sensecap.exception.BaseException;
-import cc.seeed.sensecap.interfaces.SenseCAPData;
-import cc.seeed.sensecap.model.callback.TelemetryDataCallback;
-import cc.seeed.sensecap.model.data.ChartDataListInfo;
-import cc.seeed.sensecap.model.data.ChartPointDataInfo;
+ ;
+ import cc.seeed.sensecap.actions.TelemetryData;
+ import cc.seeed.sensecap.config.OpenApiConfig;
+ import cc.seeed.sensecap.exception.BaseException;
+ import cc.seeed.sensecap.interfaces.SenseCAPData;
+ import cc.seeed.sensecap.model.callback.TelemetryDataCallback;
+ import cc.seeed.sensecap.model.data.ChartDataListInfo;
+ import cc.seeed.sensecap.model.data.ChartPointDataInfo;
 import cc.seeed.sensecap.model.data.LatestTelemetryDataInfo;
 import cc.seeed.sensecap.model.data.TelemetryDataInfo;
 import cc.seeed.sensecap.queries.data.DataQuery;

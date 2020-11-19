@@ -1,6 +1,5 @@
 package cc.seeed.sensecap.queries.device;
 
-import cc.seeed.sensecap.actions.Device;
 import cc.seeed.sensecap.config.OpenApiConfig;
 import cc.seeed.sensecap.exception.BaseException;
 import cc.seeed.sensecap.model.result.DeviceResult;

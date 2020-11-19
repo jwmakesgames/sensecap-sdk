@@ -17,8 +17,8 @@ public class OrganizationManagerDemo {
     private static SenseCAPClient senseCAPClient;
 
     static {
-        String accessId = "";
-        String accessKey = "";
+        String accessId = " ";
+        String accessKey = " ";
         int region = RegionType.SENSECAP_CC.getRegion();
         OpenApiConfig openApiConfig = new OpenApiConfig(accessId, accessKey, region);
         senseCAPClient = new SenseCAPClientBuilder().buildConfig(openApiConfig);

@@ -21,10 +21,10 @@ import java.util.List;
 public class TelemetryManagerDemo {
 
     private static SenseCAPClient senseCAPClient;
-    private static String deviceEui="";
+    private static String deviceEui=" ";
     static {
-        String accessId = "";
-        String accessKey = "";
+        String accessId = " ";
+        String accessKey = " ";
         int region = RegionType.SENSECAP_CC.getRegion();
         OpenApiConfig openApiConfig = new OpenApiConfig(accessId, accessKey, region);
         senseCAPClient = new SenseCAPClientBuilder().buildConfig(openApiConfig);
@@ -72,7 +72,7 @@ public class TelemetryManagerDemo {
          */
         DataResult dataResult1 = senseCAPClient.getDataManager().createDataQuery()
                 .startTime(1605600000000L)
-                .deviceEui("2CF7F12110700077")
+                .deviceEui(deviceEui)
                 .interval(30)
                 .build()
                 .execute();
@@ -118,4 +118,5 @@ public class TelemetryManagerDemo {
 
 
     }
+
 }

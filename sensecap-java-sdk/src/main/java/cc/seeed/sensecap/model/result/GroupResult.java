@@ -26,8 +26,8 @@ public class GroupResult extends GenericResult {
         group = new Group(openApiConfig);
     }
 
-    public GroupResult renameGroup(String groupUUID, String groupName) throws BaseException {
-        group.renameGroup(groupUUID, groupName);
+    public GroupResult rename(String groupUUID, String groupName) throws BaseException {
+        group.rename(groupUUID, groupName);
         return this;
     }
 
@@ -37,8 +37,8 @@ public class GroupResult extends GenericResult {
         return groupList;
     }
 
-    public GroupResult removeGroup(String groupUUID) throws BaseException {
-        group.removeGroup(groupUUID);
+    public GroupResult remove(String groupUUID) throws BaseException {
+        group.remove(groupUUID);
         return this;
     }
 

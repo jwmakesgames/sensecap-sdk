@@ -6,7 +6,6 @@ import cc.seeed.sensecap.config.OpenApiConfig;
 import cc.seeed.sensecap.exception.BaseException;
 import cc.seeed.sensecap.exception.HttpResponseMessageCode;
 import cc.seeed.sensecap.interfaces.SenseCAPOrganization;
-import cc.seeed.sensecap.manager.OrganizationManager;
 import cc.seeed.sensecap.model.resp.HttpResponseMessage;
 import com.alibaba.fastjson.JSONObject;
 

@@ -17,11 +17,11 @@ public interface SenseCAPGroup {
      * group
      */
 
-    GroupInfo createGroup(String groupName) throws BaseException;
+    GroupInfo create(String groupName) throws BaseException;
 
-    void renameGroup(String groupUUID, String groupName) throws BaseException;
+    void rename(String groupUUID, String groupName) throws BaseException;
 
-    void removeGroup(String groupUUID) throws BaseException;
+    void remove(String groupUUID) throws BaseException;
 
     List<GroupInfo> getGroupList() throws BaseException;
 

@@ -49,7 +49,7 @@ public class GroupQuery extends ApiRequest<GroupResult> {
 
 
     public GroupInfo create() throws BaseException {
-        GroupInfo group = new Group(openApiConfig).createGroup(this.getGroupName());
+        GroupInfo group = new Group(openApiConfig).create(this.getGroupName());
         return group;
     }
 
