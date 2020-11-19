@@ -3,7 +3,6 @@ package cc.seeed.sensecap.config;
 import cc.seeed.sensecap.common.enums.RegionType;
 import cc.seeed.sensecap.common.utils.ApiRequestOperation;
 import cc.seeed.sensecap.common.utils.HttpUtils;
-import cc.seeed.sensecap.model.auth.OrganizationAuth;
 
 /**
  * @Author AG
