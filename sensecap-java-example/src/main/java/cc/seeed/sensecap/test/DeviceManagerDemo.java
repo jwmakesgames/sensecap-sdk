@@ -71,7 +71,7 @@ public class DeviceManagerDemo {
     }
 
 
-    static void getDeviceChannelList() throws BaseException {
+    public static void getDeviceChannelList() throws BaseException {
         List<String> deviceEuis = Lists.newArrayList();
         deviceEuis.add(deviceEui);
         DeviceResult deviceResult = senseCAPClient.getDeviceManager().createDeviceQuery()
@@ -82,7 +82,7 @@ public class DeviceManagerDemo {
         System.out.println(deviceChannelInfos.toString());
     }
 
-    static void getDeviceRunningStatusList() throws BaseException {
+    public static void getDeviceRunningStatusList() throws BaseException {
         List<String> deviceEuis = Lists.newArrayList();
         deviceEuis.add(deviceEui);
         DeviceResult deviceResult = senseCAPClient.getDeviceManager().createDeviceQuery()
@@ -93,7 +93,7 @@ public class DeviceManagerDemo {
         System.out.println(deviceStatusInfos);
     }
     //eui, code, deviceName, groupUUID, longitude, latitude
-    static void bindDevice() throws BaseException {
+    public static void bindDevice() throws BaseException {
         senseCAPClient.getDeviceManager().createBinder()
                 .eui("")
                 .code("")
