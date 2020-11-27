@@ -1,5 +1,6 @@
 package cc.seeed.sensecap.config.mqtt;
 
+import cc.seeed.sensecap.model.callback.SensorMqttCallback;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
@@ -36,7 +37,8 @@ public class MQTTClient {
             options.setConnectionTimeout(connectionTimeout);
             options.setKeepAliveInterval(keepAliveInterval);
             options.setAutomaticReconnect(true);
-            client.setCallback(mqttConnectionInfo.getMqttCallback());
+
+            client.setCallback(new SensorMqttCallback(client,options));
 
             if (!client.isConnected()) {
                 client.connect(options);
@@ -50,4 +52,23 @@ public class MQTTClient {
         }
     }
 
+    public void stop() {
+        try {
+            // disconnect
+            client.disconnect();
+            // close client
+            client.close();
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void unsubscribe(String topic) {
+        try {
+            client.unsubscribe(topic);
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+    }
 }

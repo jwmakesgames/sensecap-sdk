@@ -13,32 +13,29 @@ public class ChartDataListInfo {
     private int channelIndex;
     private int measurementId;
 
-    List values;
+    List<Object[]> values;
 
     public int getChannelIndex() {
         return channelIndex;
     }
 
-    public ChartDataListInfo setChannelIndex(int channelIndex) {
+    public void setChannelIndex(int channelIndex) {
         this.channelIndex = channelIndex;
-        return this;
     }
 
     public int getMeasurementId() {
         return measurementId;
     }
 
-    public ChartDataListInfo setMeasurementId(int measurementId) {
+    public void setMeasurementId(int measurementId) {
         this.measurementId = measurementId;
-        return this;
     }
 
-    public List getValues() {
+    public List<Object[]> getValues() {
         return values;
     }
 
-    public ChartDataListInfo setValues(List values) {
+    public void setValues(List<Object[]> values) {
         this.values = values;
-        return this;
     }
 }

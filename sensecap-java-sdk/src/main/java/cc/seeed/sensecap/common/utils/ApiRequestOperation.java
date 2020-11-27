@@ -5,10 +5,10 @@ import cc.seeed.sensecap.model.resp.HttpResponseMessage;
 import com.alibaba.fastjson.JSON;
 import com.google.common.collect.Maps;
 import com.google.common.util.concurrent.RateLimiter;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -24,8 +24,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class ApiRequestOperation {
 
-    Logger logger = LoggerFactory.getLogger(ApiRequestOperation.class);
-
+    Log logger = LogFactory.getLog(this.getClass());
     private Map<String, Integer> map;
     private String domain;
     private String token;
@@ -42,7 +41,7 @@ public class ApiRequestOperation {
     public HttpResponseMessage getOperation(String path, Map<String, String> query) throws IOException {
 
         try {
-            logger.info("domain:{}, path:{},token:{}", domain, path, token);
+            logger.info("domain: " + domain + "path:" + path + " ,token: " + token);
             String key = path + "-" + token;
             RateLimiter rateLimiter = CacheUtils.caches.get(path + "-" + token);
             rateLimiter.acquire(1);
@@ -54,7 +53,6 @@ public class ApiRequestOperation {
                 Map<String, Integer> stringIntegerMap = CacheUtils.timesCaches.get(key);
                 int times = stringIntegerMap.get(key);
                 if (times > 0) {
-                    logger.warn("path:{}.retry:{},times:{}", path, statusCode, times);
                     times--;
                     stringIntegerMap.put(key, times);
                     CacheUtils.timesCaches.put(key, stringIntegerMap);
@@ -66,7 +64,7 @@ public class ApiRequestOperation {
                     return getOperation(path, query);
                 }
             }
-            logger.info("getOperation resp code:{}", statusCode);
+            logger.info("getOperation resp code: " + statusCode);
             String resp = EntityUtils.toString(response.getEntity());
             HttpResponseMessage httpResponseMessage = JSON.parseObject(resp, HttpResponseMessage.class);
             return httpResponseMessage;
@@ -94,7 +92,6 @@ public class ApiRequestOperation {
             String key = path + "-" + token;
             RateLimiter rateLimiter = CacheUtils.caches.get(path + "-" + token);
             rateLimiter.acquire(1);
-            logger.info("domain:{}, path:{},token:{},body:{}", domain, path, token, body);
             Map<String, String> headers = new HashMap<String, String>();
             headers.put("Authorization", token);
             HttpResponse response = HttpUtils.doPost(domain, path, "POST", headers, query, body);
@@ -104,7 +101,6 @@ public class ApiRequestOperation {
                 Map<String, Integer> stringIntegerMap = CacheUtils.timesCaches.get(key);
                 int times = stringIntegerMap.get(key);
                 if (times > 0) {
-                    logger.warn("path:{}.retry:{},times:{}", path, statusCode, times);
                     times--;
                     stringIntegerMap.put(key, times);
                     CacheUtils.timesCaches.put(key, stringIntegerMap);
@@ -134,7 +130,6 @@ public class ApiRequestOperation {
             String key = path + "-" + token;
             RateLimiter rateLimiter = CacheUtils.caches.get(path + "-" + token);
             rateLimiter.acquire(1);
-            logger.info("domain:{}, path:{},token:{},body:{}", domain, path, token, body);
             Map<String, String> headers = new HashMap<String, String>();
             headers.put("Authorization", token);
             headers.put("content-type", "application/json; charset=utf-8");
@@ -144,7 +139,6 @@ public class ApiRequestOperation {
                 Map<String, Integer> stringIntegerMap = CacheUtils.timesCaches.get(key);
                 int times = stringIntegerMap.get(key);
                 if (times > 0) {
-                    logger.warn("path:{}.retry:{},times:{}", path, statusCode, times);
                     times--;
                     stringIntegerMap.put(key, times);
                     CacheUtils.timesCaches.put(key, stringIntegerMap);

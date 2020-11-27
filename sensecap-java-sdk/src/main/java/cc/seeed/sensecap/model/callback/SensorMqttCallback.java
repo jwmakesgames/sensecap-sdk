@@ -5,11 +5,9 @@ import cc.seeed.sensecap.exception.BaseException;
 import cc.seeed.sensecap.model.data.TelemetryDataResult;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.eclipse.paho.client.mqttv3.*;
 
 import java.util.List;
 import java.util.Map;
@@ -22,14 +20,45 @@ import java.util.Map;
  */
 public class SensorMqttCallback implements MqttCallback {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    public SensorMqttCallback() {
+    Log logger = LogFactory.getLog(this.getClass());
+    public MqttClient client;
+    private MqttConnectOptions options;
+    public SensorMqttCallback(MqttClient client, MqttConnectOptions options) {
+        this.client = client;
+        this.options = options;
 
     }
 
     @Override
-    public void connectionLost(Throwable throwable) {
+    public void connectionLost(Throwable cause) {
+        //logger.warn("Disconnect，" + cause.getMessage());
+        int i=1;
+        while(true){
+            try {
+                if(!client.isConnected()){
+                    client.connect(options);
+                }else {
+                    client.disconnect();
+                    client.connect(options);
+                }
+                logger.warn("******* <"+client.getClientId()+"> 第"+i+"次重连成功********   topic:{}");
+                break;
+            } catch (Exception e) {
+                logger.warn("------- <"+client.getClientId()+"> 第"+i+"次重连失败--------  topic:{}");
+                try {
+                    long time=3000L*i;
+                    if(time>300000L){
+                        time=300000L;
+                    }
+                    Thread.sleep(time);
+                } catch (InterruptedException ex) {
+                    logger.warn("<<<<<<<<<延迟重连失败>>>>>>>>");
+                }
+                i++;
+                continue;
+            }
+
+        }
 
     }
 
@@ -42,7 +71,7 @@ public class SensorMqttCallback implements MqttCallback {
         int measurementId = Integer.parseInt(split[6]);
         int channelIndex = Integer.parseInt(split[4]);
         List<Map<String, TelemetryDataCallback>> mapList = CallBackMapCache.getSimpleCache().get(deviceEui);
-        logger.warn("mapList:{},topic:{}", mapList, topic);
+        logger.warn("mapList: "+mapList+" , topic: "+ topic);
         if (mapList == null) {
             return;
         }

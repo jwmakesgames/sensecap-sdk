@@ -24,8 +24,8 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -41,7 +41,7 @@ import java.util.Set;
  */
 public class TelemetryData implements SenseCAPData {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    Log logger = LogFactory.getLog(this.getClass());
 
     private final static String CC_HOST = "tcp://sensecap-openstream.seeed.cc";
     private final static String CN_HOST = "tcp://sensecap-openstream.seeed.cn";
@@ -78,7 +78,7 @@ public class TelemetryData implements SenseCAPData {
 
             HttpResponseMessage operation = openApiConfig.apiRequestOperation.getOperation(PathConst.VIEW_LATEST_TELEMETRY_DATA, query);
             if (operation.getCode() != 0) {
-                logger.warn("operation:{}", operation);
+                logger.warn("operation:{}"+ operation);
                 throw new BaseException(operation.getMsg());
             }
             JSONArray objects = JSON.parseArray(operation.getData().toString());
@@ -461,7 +461,7 @@ public class TelemetryData implements SenseCAPData {
         String userName = "org-" + organizationId;
 
         mqttManager.initMqtt(new MqttConnectionInfo()
-                .setMqttCallback(new SensorMqttCallback())
+                //.setMqttCallback(new SensorMqttCallback())
                 .setTopics(topics)
                 .setPassWord(openApiConfig.accessKey)
                 .setUserName(userName)

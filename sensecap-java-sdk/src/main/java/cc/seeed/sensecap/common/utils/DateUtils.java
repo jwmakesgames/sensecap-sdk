@@ -1,8 +1,8 @@
 package cc.seeed.sensecap.common.utils;
 
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,7 +15,7 @@ import java.util.*;
  */
 public class DateUtils {
 
-    static Logger logger = LoggerFactory.getLogger(DateUtils.class);
+    static Log logger = LogFactory.getLog(DateUtils.class);
 
     /**
      * 定义常量

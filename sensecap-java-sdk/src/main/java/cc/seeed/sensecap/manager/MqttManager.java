@@ -7,10 +7,9 @@ import cc.seeed.sensecap.config.mqtt.MqttConnectionInfo;
 import cc.seeed.sensecap.exception.BaseException;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.paho.client.mqttv3.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.List;
 import java.util.Map;
 
@@ -23,7 +22,7 @@ import java.util.Map;
 public class MqttManager {
 
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    Log logger = LogFactory.getLog(this.getClass());
 
     public void initMqtt(MqttConnectionInfo mqttConnectionInfo) throws BaseException {
         checkMqttConnectionInfo(mqttConnectionInfo);
@@ -59,7 +58,7 @@ public class MqttManager {
     }
 
     boolean checkMqttConnectionInfo(MqttConnectionInfo mqttConnectionInfo) throws BaseException {
-        logger.warn("mqttConnectionInfo :{}", mqttConnectionInfo.toString());
+        logger.warn("mqttConnectionInfo : "+ mqttConnectionInfo.toString());
         try {
             Chain.build()
                     .must(x -> mqttConnectionInfo.getOrgId() > 0)
@@ -68,7 +67,8 @@ public class MqttManager {
                     .must(x -> StringUtils.isNotBlank(mqttConnectionInfo.getHost()))
                     .must(x -> StringUtils.isNotBlank(mqttConnectionInfo.getPassWord()))
                     .must(x -> StringUtils.isNotBlank(mqttConnectionInfo.getUserName()))
-                    .must(x -> mqttConnectionInfo.getMqttCallback() != null);
+                    //.must(x -> mqttConnectionInfo.getMqttCallback() != null)
+            ;
         } catch (BaseException e) {
             throw new BaseException("MissingArgument");
         }

@@ -19,7 +19,7 @@ public class MqttConnectionInfo {
     private long orgId;
     private int[] qos = {1};
 
-    private MqttCallback mqttCallback;
+    //private MqttCallback mqttCallback;
 
     public int[] getQos() {
         return qos;
@@ -85,14 +85,14 @@ public class MqttConnectionInfo {
         return this;
     }
 
-    public MqttCallback getMqttCallback() {
+    /*public MqttCallback getMqttCallback() {
         return mqttCallback;
     }
 
     public MqttConnectionInfo setMqttCallback(MqttCallback mqttCallback) {
         this.mqttCallback = mqttCallback;
         return this;
-    }
+    }*/
 
     @Override
     public String toString() {
@@ -104,7 +104,6 @@ public class MqttConnectionInfo {
                 ", passWord='" + passWord + '\'' +
                 ", orgId=" + orgId +
                 ", qos=" + Arrays.toString(qos) +
-                ", mqttCallback=" + mqttCallback +
                 '}';
     }
 }
