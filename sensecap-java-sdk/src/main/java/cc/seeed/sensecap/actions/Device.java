@@ -71,8 +71,9 @@ public class Device implements SenseCAPDevice {
         if (deviceType > 0) {
             query.put("device_type", String.valueOf(deviceType));
         }
-
-        query.put("group_uuid", groupUUID);
+        if (StringUtils.isNotBlank(groupUUID)  ) {
+            query.put("group_uuid", groupUUID);
+        }
         try {
             HttpResponseMessage httpResponseMessage = openApiConfig.apiRequestOperation.getOperation(PathConst.LIST_DEVICES, query);
             list = JsonUtils.parseArray(httpResponseMessage, DeviceBaseInfo.class);
@@ -86,6 +87,9 @@ public class Device implements SenseCAPDevice {
 
 
     public List<DeviceInfo> getDeviceInfo(List<String> deviceEuis, int deviceType) throws BaseException {
+        if (CollectionUtils.isEmpty(deviceEuis)) {
+            throw new BaseException(HttpResponseMessageCode.NOT_PARAM);
+        }
         List<DeviceInfo> list = Lists.newArrayList();
         List<List<String>> subLists = getSubLists(deviceEuis, DEVICE_MAX_SIZE);
         for (List<String> devices : subLists) {
@@ -123,6 +127,9 @@ public class Device implements SenseCAPDevice {
 
 
     public List<DeviceChannelInfo> getDeviceChannelList(List<String> deviceEuis) throws BaseException {
+        if (CollectionUtils.isEmpty(deviceEuis)) {
+            throw new BaseException(HttpResponseMessageCode.NOT_PARAM);
+        }
         List<List<String>> subLists = getSubLists(deviceEuis, DEVICE_MAX_SIZE);
         List<DeviceChannelInfo> list = Lists.newArrayList();
         for (List<String> devices : subLists) {
@@ -164,6 +171,9 @@ public class Device implements SenseCAPDevice {
     }
 
     public DeviceChannelInfo getDeviceChannel(String deviceEui) throws BaseException {
+        if (StringUtils.isBlank(deviceEui)) {
+            throw new BaseException(HttpResponseMessageCode.NOT_PARAM);
+        }
         try {
             List<String> device = Lists.newArrayListWithExpectedSize(1);
             device.add(deviceEui);
@@ -199,6 +209,9 @@ public class Device implements SenseCAPDevice {
     }
 
     public List<DeviceStatusInfo> getDeviceRunningStatusList(List<String> deviceEuis) throws BaseException {
+        if (CollectionUtils.isEmpty(deviceEuis)) {
+            throw new BaseException(HttpResponseMessageCode.NOT_PARAM);
+        }
         List<DeviceStatusInfo> list = Lists.newArrayList();
         List<List<String>> subLists = getSubLists(deviceEuis, DEVICE_MAX_SIZE);
 
@@ -282,6 +295,9 @@ public class Device implements SenseCAPDevice {
 
 
     public boolean deleteDevices(List<String> deviceEuis) throws BaseException {
+        if (CollectionUtils.isEmpty(deviceEuis)) {
+            throw new BaseException(HttpResponseMessageCode.NOT_PARAM);
+        }
         List<List<String>> subLists = getSubLists(deviceEuis, DEVICE_MAX_SIZE);
         for (List<String> devices : subLists) {
             try {
@@ -303,6 +319,9 @@ public class Device implements SenseCAPDevice {
 
 
     public boolean deleteDevice(String deviceEui) throws BaseException {
+        if (StringUtils.isBlank(deviceEui)) {
+            throw new BaseException(HttpResponseMessageCode.NOT_PARAM);
+        }
         try {
             List<String> device = Lists.newArrayListWithExpectedSize(1);
             device.add(deviceEui);

@@ -2,6 +2,7 @@ package cc.seeed.sensecap.actions;
 
 import cc.seeed.sensecap.api.url.PathConst;
 import cc.seeed.sensecap.common.constant.TimeConstant;
+import cc.seeed.sensecap.common.enums.MqttHostEnum;
 import cc.seeed.sensecap.common.utils.DateUtils;
 import cc.seeed.sensecap.common.utils.StringUtil;
 import cc.seeed.sensecap.config.OpenApiConfig;
@@ -43,8 +44,8 @@ public class TelemetryData implements SenseCAPData {
 
     Log logger = LogFactory.getLog(this.getClass());
 
-    private final static String CC_HOST = "tcp://sensecap-openstream.seeed.cc";
-    private final static String CN_HOST = "tcp://sensecap-openstream.seeed.cn";
+    //private final static String CC_HOST = "tcp://sensecap-openstream.seeed.cc";
+    //private final static String CN_HOST = "tcp://sensecap-openstream.seeed.cn";
     private final static int DATA_DAY = 365;
 
     private final OpenApiConfig openApiConfig;
@@ -452,9 +453,9 @@ public class TelemetryData implements SenseCAPData {
         }
         mapList.add(map);
         int region = openApiConfig.region;
-        String host = CN_HOST;
+        String host = MqttHostEnum.CN_HOST.getHost();
         if (region == 2) {
-            host = CC_HOST;
+            host = MqttHostEnum.CC_HOST.getHost();
         }
 
         String clientId = "org-" + organizationId + "-default";
