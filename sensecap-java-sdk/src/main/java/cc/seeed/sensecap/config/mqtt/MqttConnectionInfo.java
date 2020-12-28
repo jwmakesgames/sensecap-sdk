@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class MqttConnectionInfo {
     private String host;
     private String[] topics;
-    private String clientId;
+    private String clientId="org-" + this.orgId + "-default";
     private String userName;
     private String passWord;
     private long orgId;

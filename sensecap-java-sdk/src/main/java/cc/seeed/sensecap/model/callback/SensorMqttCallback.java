@@ -1,6 +1,8 @@
 package cc.seeed.sensecap.model.callback;
 
 import cc.seeed.sensecap.config.mqtt.CallBackMapCache;
+import cc.seeed.sensecap.config.mqtt.MQTTClient;
+import cc.seeed.sensecap.config.mqtt.MapCache;
 import cc.seeed.sensecap.exception.BaseException;
 import cc.seeed.sensecap.model.data.TelemetryDataResult;
 import com.alibaba.fastjson.JSON;
@@ -32,15 +34,18 @@ public class SensorMqttCallback implements MqttCallback {
     @Override
     public void connectionLost(Throwable cause) {
         //logger.warn("Disconnect，" + cause.getMessage());
+        String clientId = client.getClientId();
+        String[] split = clientId.split("-");
+       // MQTTClient mqttClient = MapCache.getSimpleCache().get(split[1]);
         int i=1;
         while(true){
             try {
                 if(!client.isConnected()){
                     client.connect(options);
-                }else {
-                    client.disconnect();
-                    client.connect(options);
-                }
+                }/*else {
+                    mqttClient.client.disconnect();
+                    mqttClient.client.connect(options);
+                }*/
                 logger.warn("******* <"+client.getClientId()+"> 第"+i+"次重连成功********   topic:{}");
                 break;
             } catch (Exception e) {
